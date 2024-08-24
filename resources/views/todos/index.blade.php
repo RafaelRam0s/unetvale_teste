@@ -24,7 +24,11 @@
                         <td>{{ $todo->id }}</td>
                         <td>{{ $todo->name }}</td>
                         <td>
-                            <input type="checkbox" disabled {{ $todo->completed ? 'checked' : '' }}>
+                            <form action="{{ url('/todos/completed/' . $todo->id) }}" method="POST">
+                                @csrf
+                                <input type="checkbox" name="completed" {{ $todo->completed ? 'checked' : '' }} 
+                                    onchange="this.form.submit()">
+                            </form>
                         </td>
                     </tr>
                 @endforeach
